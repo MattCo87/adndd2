@@ -1,0 +1,93 @@
+<footer class="app_footer">
+    <div class="app_footer_links">
+        <nav>
+            <h3>Aide</h3>
+            <ul>
+                <li>
+                    <a href="{{ path('about') }}" {% if app.request.get('_route') == 'about' %}class="active"{% endif %} title="{{ 'pages.about.title' | trans | capitalize }}">
+                        {{ 'pages.about.menu' | trans | capitalize }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('faq') }}" {% if app.request.get('_route') == 'faq' %}class="active"{% endif %} title="{{ 'pages.faq.title' | trans | capitalize }}">
+                        {{ 'pages.faq.menu' | trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('contact') }}" {% if app.request.get('_route') == 'contact' %}class="active"{% endif %} title="{{ 'pages.contact.title' | trans | capitalize }}">
+                        {{ 'pages.contact.menu' | trans | capitalize }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav>
+            <h3>Jeux de rôles</h3>
+            <ul>
+                <li>
+                    <a href="{{ path('games') }}" {% if app.request.get('_route') == 'games' %}class="active"{% endif %} title="{{ 'pages.games.title' | trans | capitalize }}">
+                        {{ 'pages.games.menu' | trans | capitalize }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('play') }}" {% if app.request.get('_route') == 'play' %}class="active"{% endif %} title="{{ 'pages.play.menu' | trans | capitalize }}">
+                        {{ 'pages.play.title' | trans | capitalize }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav class="socials">
+            <h3>Suis-nous</h3>
+            <ul>
+                {% if appOrganization.getFacebook() %}
+                    <li>
+                        <a href="{{ appOrganization.getFacebook() }}" class="facebook" target="_blank" rel="noopener noreferrer" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if appOrganization.getTwitter() %}
+                    <li>
+                        <a href="{{ appOrganization.getTwitter() }}" class="twitter" target="_blank" rel="noopener noreferrer" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if appOrganization.getInstagram() %}
+                    <li>
+                        <a href="{{ appOrganization.getInstagram() }}" class="instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if appOrganization.getYoutube() %}
+                    <li>
+                        <a href="{{ appOrganization.getYoutube() }}" class="youtube" target="_blank" rel="noopener noreferrer" title="Youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    {% if appConfig.getLegals() %}
+        {% set slug = app.request.get('slug') %}
+        <div class="app_footer_links legals">
+            {% for legal in appConfig.getLegals() %}
+                <a href="{{ path('legal', {'slug': legal.slug}) }}" {% if slug == legal.slug %}class="active"{% endif %} title="{{ legal.title }}">
+                    {{ legal.title }}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ path('home') }}" class="app_logo" title="{{ 'pages.home.title' | trans | capitalize }}">
+        <img src="{{ asset('assets/images/logo_adndd_full.png') }}" alt="{{ appConfig.getAppName() }}" />
+    </a>
+
+    <p class="copyrights">
+        © {{ appConfig.getAppAuthor() }} {{ 'now' | date('Y') }}. {{ 'default.copyrights' | trans | capitalize }}.
+    </p>
+</footer>

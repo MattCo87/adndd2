@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ legal.slug }}{% endblock %}
+
+{% block body_class %}legal{% endblock %}
+
+{% block body %}
+    <article class="aside">
+        <section>
+            <h1>{{ legal.title }}</h1>
+
+            {{ legal.content | raw }}
+        </section>
+
+        <aside>
+            <h2>{{ 'default.more' | trans | capitalize }}</h2>
+
+            <a href="{{ path('contact') }}" class="app_button cta" title="{{ 'pages.contact.title' | trans | capitalize }}">
+                {{ 'pages.login.aside.join' | trans | capitalize }}
+            </a>
+
+            <a href="{{ path('app_login') }}" class="app_button" title="{{ 'pages.login.title' | trans | capitalize }}">
+                {{ 'pages.login.menu' | trans | capitalize }}
+            </a>
+
+            <a href="{{ path('contact') }}" class="app_button" title="{{ 'pages.contact.menu' | trans | capitalize }}">
+                {{ 'pages.contact.title' | trans | capitalize }}
+            </a>
+        </aside>
+    </article>
+{% endblock %}

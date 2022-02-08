@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'pages.about.title' | trans | capitalize }}{% endblock %}
+
+{% block body_class %}about{% endblock %}
+
+{% block body %}
+    <article>
+        <section>
+            {% if about | length > 0 %}
+                <h1>{{ about.title }}</h1>
+
+                {{ about.content | raw }}
+            {% endif %}
+        </section>
+    </article>
+{% endblock %}

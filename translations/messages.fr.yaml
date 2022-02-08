@@ -1,0 +1,258 @@
+default:
+  welcome: "bienvenue"
+  more: "En plus…"
+  orelse: "ou sinon"
+  copyrights: "tous droits réservés"
+  cancel: "annule"
+  back: "retour"
+  delete: "supprime"
+  edit: "modifie"
+  confirm: "c'est parti !"
+pages:
+  login:
+    menu: "connexion"
+    title: "connecte-toi pour jouer"
+    aside:
+      join: "deviens adhérent"
+  logout:
+    menu: "déconnexion"
+    title: "déconnecte-toi"
+  forgot:
+    menu: "mot de passe perdu"
+    title: "perdu ton mot de passe ?"
+  resetpassword:
+    title: "régénère ton mot de passe"
+    menu: "mot de passe perdu"
+    checkemail:
+      info: "Si un compte existe avec cette adresse e-mail, un message vient d'être envoyé !<br />Ce lien expirera dans %time%."
+      info2: "Si tu ne reçois pas de mail, vérifie tes spams ou"
+      info2link: "essaie encore"
+  user:
+    menu: "ton compte"
+    title: "ton profil joueur"
+    password:
+      title: "modifie ton mot de passe"
+      menu: "modifie ton mot de passe"
+    characters:
+      menu: "tes personnages"
+      title: "gère tes personnages"
+      create:
+        menu: "nouveau personnage"
+        title: "crée un nouveau personage"
+      infos:
+        menu: "ton personnage"
+        title: "aperçu de ton personnage"
+      edit:
+        menu: "modifie"
+        title: "modifie ton personnage"
+      sheet:
+        menu: "fiche perso"
+        title: "feuille de personnage"
+    games:
+      menu: "tes aventures"
+      title: "gère tes aventures"
+    plays:
+      menu: "tes scénarios"
+      title: "gère tes scénarios"
+      join:
+        title: "rejoins un scénario"
+    campaign:
+      create:
+        title: "crée une campagne"
+        menu: "Nouvelle campagne"
+      edit:
+        title: "modifie une campagne"
+  home:
+    menu: "accueil"
+    title: "page d'accueil"
+  about:
+    menu: "présentation"
+    title: "qui sommes-nous ?"
+  games:
+    menu: "les jeux"
+    title: "tous les jeux en ligne"
+  play:
+    menu: "joue !"
+    title: "joue en ligne"
+    title2: "les scénarios"
+    create:
+      title: "crée un scénario"
+      menu: "nouveau scénario"
+    edit:
+      title: "modifie un scénario"
+      menu: "modifie le scénario"
+    invite:
+      title: "invite des personnages dans ce scénario"
+      menu: "invite des personnages"
+    game:
+      title: "infos du scénario"
+    campaign:
+      title: "toutes tes campagnes de jeu"
+      menu: "gère tes campagnes"
+  contact:
+    menu: "contact"
+    title: "contactons-nous"
+    aside:
+      ouraddress: "notre adresse"
+      ourtelephone: "notre téléphone"
+      openhours: "nos horaires"
+      weekhours: "Du Lundi au Vendredi"
+      weekendhours: "Samedi et Dimanche"
+  faq:
+    menu: "F.A.Q."
+    title: "questions fréquentes"
+  legals:
+    mentions:
+      menu: "mentions légales"
+      title: "mentions légales"
+    ugc:
+      menu: "conditions générales d'utilisation"
+      title: "conditions générales d'utilisation"
+    privacy:
+      menu: "confidentialité & cookies"
+      title: "confidentialité & cookies"
+user:
+  profile:
+    email:
+      label: "ton adresse e-mail"
+      placeholder: "ex: sophie@dupont.com"
+    pseudo:
+      label: "ton pseudo"
+      placeholder: "ex: groslulu"
+    gender:
+      label: "ta civilité"
+    firstname:
+      label: "ton prénom"
+      placeholder: "ex: Sophie"
+    lastname:
+      label: "ton nom"
+      placeholder: "ex: Dupont"
+    submit:
+      label: "Enregistre ton profil"
+login:
+  email:
+    label: "ton adresse e-mail"
+    placeholder: "ex: sophie@dupont.com"
+  password:
+    label: "ton mot de passe"
+  submit:
+    label: "connecte-toi !"
+resetpassword:
+  email:
+    label: "ton adresse e-mail"
+    info: "entre ton adresse e-mail et nous t'enverrons un mail contenant un lien pour régénérer ton mot de passe."
+  submit:
+    label: "envoyez-moi ce mail !"
+  reset:
+    first:
+      label: "nouveau mot de passe"
+    second:
+      label: "confirmation"
+    submit:
+      label: "régénère ton mot de passe"
+    errors:
+      length: "ton mot de passe doit contenir au moins 6 caractères"
+      mismatch: "les deux mots de passe ne sont pas identiques"
+contact:
+  name:
+    label: "ton nom"
+    placeholder: "ex: Sophie Dupont"
+  email:
+    label: "ton adresse e-mail"
+    placeholder: "ex: sophie@dupont.com"
+  subject:
+    label: "C'est à quel sujet ?"
+    placeholder: "ex: Devenir adhérent"
+  message:
+    label: "ton message"
+    placeholder: "Bonjour,"
+  submit:
+    label: "envoie ton message"
+play:
+  game:
+    label: "jeu concerné"
+    emptyData: "Choisis le jeu à associer à cette campagne"
+    campaign:
+      label: "campagne associée"
+      emptyData: "Choisis la campagne à associer au scénario"
+    name:
+      label: "nom du scénario"
+      placeholder: "ex: La grosse aventure"
+    shortDescription:
+      label: "description (courte)"
+      placeholder: "Décris vite fait ton scénario"
+    description:
+      label: "description (longue)"
+      placeholder: "Décris mieux que ça ton scénario"
+    startAt:
+      label: "date de début"
+    isPrivate:
+      label: "partie privée"
+    submit:
+      label: "crée le scénario"
+    edit:
+      label: "modifie le scénario"
+    visibility:
+      public: "publique"
+      private: "privée"
+  invite:
+    submit:
+      label: "invite"
+character:
+  edit:
+    label: "modifie"
+  avatar:
+    label: "son avatar"
+  name:
+    label: "son nom"
+    placeholder: "ex: Bohort"
+  surname:
+    label: "son surnom"
+    placeholder: "ex: Le Brave"
+  age:
+    label: "son âge"
+    placeholder: "ex: 15"
+  allegiance:
+    label: "ses allégeances"
+    placeholder: "ex: Chaos 0 - Balance 0 - Loi 3"
+  birthplace:
+    label: "son origine"
+    placeholder: "ex: Paris"
+  homeplace:
+    label: "Son habitat"
+    placeholder: "ex: France"
+  occupation:
+    label: "son occupation"
+    placeholder: "ex: Marin"
+  description:
+    label: "décris-le"
+    placeholder: "ex: Grand, fin, calme, un peu renfrogné quelques fois…"
+  story:
+    label: "son histoire"
+    placeholder: "ex: Il fut embarqué sur un bâteau le long des côtes des Terres désolées et humides. Il a fuit les meurtri@s de sa famille…"
+  distinctive:
+    label: "signes distinctifs"
+    placeholder: "ex: Paumettes proéminentes, Yeux sombres et creux, Tatouages tribaux, …"
+  notes:
+    label: "notes"
+    placeholder: "Ce blabla te permettra de noter diverses infos sur ton perso, pendant une partie ou à la fin d'un scénario ;)"
+  guidingHand:
+    placeholder: "ex: Droitier, Gaucher, Fausse Patte, …"
+  weight:
+    placeholder: "ex: 330kg"
+  size:
+    placeholder: "ex: 4m80"
+campaign:
+  name:
+    label: "nom"
+    placeholder: "ex: La vallée des perdus"
+  description:
+    label: "description"
+    placeholder: "que va-t-il se passer au fil des scénarios ?"
+  shortdescription:
+    label: "description (courte)"
+    placeholder: "Décris cette campagne vite fait"
+  submit:
+    label: "crée ta campagne"
+  edit:
+    label: "modifie cette campagne"

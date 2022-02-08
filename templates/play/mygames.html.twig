@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'pages.user.games.title' | trans | capitalize }}{% endblock %}
+
+{% block body_class %}play{% endblock %}
+
+{% block body %}
+    <article>
+        <section>
+            <h1>{{ 'pages.user.games.menu' | trans | capitalize }}</h1>
+
+            <!-- Flash messages -->
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    {% if loop.first %}
+                        <div class="app_alert {{ label }}">
+                            {{ message | trans | capitalize }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            {% if myGames | length == 0 %}
+                <div class="app_alert info">
+                    Tu ne joues à aucune table en ce moment.
+                    <br />
+                    Pour en rejoindre une, va voir sur la page des
+                    <a href="{{ path('play') }}" title="{{ 'pages.play.title' | trans | capitalize }}">scénarios en attente de personnages</a>
+                    !
+                </div>
+            {% else %}
+                <div class="app_filters">
+                    <h2>Tu peux filtrer par jeu si tu veux <i class="fas fa-hand-point-right"></i></h2>
+
+                    <div class="app_filters_controls">
+                        <select name="tables_game" id="tables_game" class="app_filter_select">
+                            <option value="all">{{ 'pages.games.title' | trans | capitalize }}</option>
+                            {% set scenariosGames = [] %}
+                            {% for scenario in myGames %}
+                                {% if scenario.game.id not in scenariosGames %}
+                                    <option value="{{ scenario.game.id }}">{{ scenario.game.name }}</option>
+                                    {% set scenariosGames = scenariosGames|merge([scenario.game.id]) %}
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="app_grid three app_slider xs">
+
+                    {% for scenario in myGames %}
+                        <div class="game app_grid_item app_slider_item" data-gameid="{{ scenario.game.id }}">
+                            <div class="app_grid_item_header">
+                                <img src="{{ asset('assets/images/games/' ~ scenario.game.media) }}" alt="{{ scenario.game.name }}" class="app_grid_item_image" />
+                                <h3 class="app_grid_item_title">{{ scenario.game.name }}</h3>
+                                {% if scenario.campaign %}
+                                    <h5 class="app_grid_item_subtitle sub">{{ scenario.campaign.name }}</h5>
+                                {% endif %}
+                                <h4 class="app_grid_item_subtitle">{{ scenario.name }}</h4>
+                            </div>
+
+                            <div>
+                                <div class="app_grid_item_info excerpt">
+                                    {{ scenario.shortDescription | raw }}
+                                </div>
+
+                                <p class="app_grid_item_infos flex around">
+                                    <strong>
+                                        <i class="fas fa-users"></i>
+                                        {{ scenario.scenarioCharacters | length }}/5
+                                    </strong>
+
+                                    <strong>{{ scenario.startAt | date('d/m/Y H:i') }}</strong>
+                                </p>
+
+                                <div class="app_grid_item_thumbnails">
+                                    {% for scenarioCharacter in scenario.scenarioCharacters %}
+                                        <p class="thumbnail {% if not scenarioCharacter.isAccepted %}disabled{% endif %}" title="{{ scenarioCharacter.personnage.fullname }}{% if not scenarioCharacter.isAccepted %} (en attente){% endif %}">
+                                            <img src="{{ asset('assets/images/characters/' ~ scenarioCharacter.personnage.avatar) }}" class="app_image thumbnail {% if scenarioCharacter.personnage.user == app.user %}active{% endif %}" alt="{{ scenarioCharacter.personnage.fullname }}">
+                                        </p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="app_grid_item_footer">
+                                {% set myCharacter = null %}
+                                {% set isAccepted = false %}
+                                {% for game in myGames %}
+                                    {% for scenarioCharacter in game.scenarioCharacters %}
+                                        {% if scenarioCharacter.personnage.user.id == app.user.id and scenarioCharacter.personnage.game.id == scenario.game.id %}
+                                            {% set myCharacter = scenarioCharacter.personnage %}
+                                            {% if scenarioCharacter.isAccepted %}
+                                                {% set isAccepted = true %}
+                                            {% endif %}
+                                            <a href="{{ path('user.play.leave', {'id': scenario.id, 'characterId': myCharacter.id}) }}" class="app_grid_item_footer_action button leave" title="Quitte cette table de jeu" data-scenarioid="{{ scenario.id }}">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% if isAccepted %}
+                                    <a href="{{ path('play.scenario', {'id': scenario.id}) }}" class="app_grid_item_footer_action button cta" title="Rejoins la partie">Joue</a>
+                                {% else %}
+                                    <span class="app_grid_item_footer_action">En attente</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+        </section>
+    </article>
+{% endblock %}
+
+{% block javascripts %}
+    {% if myGames | length > 0 %}
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const gamesThumbnails = document.querySelectorAll(('.game'))
+                const filterSelect = document.getElementById('tables_game')
+                filterSelect.addEventListener('change', event => {
+                    const gameId = filterSelect.value
+                    if (gameId === 'all') {
+                        for (const gameThumbnail of gamesThumbnails) {
+                            gameThumbnail.style.display = 'flex'
+                        }
+                    } else {
+                        for (const gameThumbnail of gamesThumbnails) {
+                            if (parseInt(gameThumbnail.dataset.gameid) !== parseInt(gameId)) {
+                                gameThumbnail.style.display = 'none'
+                            } else {
+                                gameThumbnail.style.display = 'flex'
+                            }
+                        }
+                    }
+                })
+
+                const leaveButtons = document.querySelectorAll('.leave')
+                for (const leaveButton of leaveButtons) {
+                    leaveButton.addEventListener('click', event => {
+                        event.preventDefault()
+                        if (window.confirm('Veux-tu VRAIMENT abandonner cette table de jeu ?')) {
+                            let button = event.target
+
+                            if (button.tagName === 'I') {
+                                button = button.parentNode
+                            }
+
+                            console.log('Tu quittes la table #' + button.dataset.scenarioid)
+                            window.location.href = button.href
+                        }
+                    })
+                }
+            })
+        </script>
+    {% endif %}
+{% endblock %}

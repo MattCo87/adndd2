@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'pages.faq.title' | trans | capitalize }}{% endblock %}
+
+{% block body_class %}faq{% endblock %}
+
+{% block body %}
+    <article class="aside">
+        <section>
+            <h1>{{ 'pages.faq.title' | trans | capitalize }}</h1>
+
+            <dl>
+                {% for item in faq %}
+                    <dt>{{ item.question }}</dt>
+                    <dd>{{ item.answer }}</dd>
+                {% endfor %}
+            </dl>
+        </section>
+
+        <aside>
+            <h2>{{ 'default.more' | trans | capitalize }}</h2>
+
+            <a href="{{ path('contact') }}" class="app_button cta" title="{{ 'pages.contact.title' | trans | capitalize }}">
+                {{ 'pages.login.aside.join' | trans | capitalize }}
+            </a>
+
+            <a href="{{ path('app_login') }}" class="app_button" title="{{ 'pages.login.title' | trans | capitalize }}">
+                {{ 'pages.login.menu' | trans | capitalize }}
+            </a>
+
+            <a href="{{ path('contact') }}" class="app_button" title="{{ 'pages.contact.menu' | trans | capitalize }}">
+                {{ 'pages.contact.title' | trans | capitalize }}
+            </a>
+        </aside>
+    </article>
+{% endblock %}

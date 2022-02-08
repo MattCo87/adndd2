@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'default.welcome' | trans | capitalize }}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block body %}
+    <article>
+        <section class="cover">
+            <h1>{{ appConfig.getAppTitle() }}</h1>
+
+            <img src="{{ asset('assets/images/logo_adndd_full.png') }}" class="app_logo" alt="{{ appConfig.getAppName() }}" />
+
+            <a href="{{ path('about') }}" class="app_button cta" title="{{ 'pages.about.menu' | trans | capitalize }}">{{ 'pages.about.title' | trans | capitalize }}</a>
+        </section>
+
+        {% if games | length > 0 %}
+            <section class="games">
+                <div class="app_grid four app_slider xs">
+                    {% for game in games %}
+                        <a href="{{ path('games') }}" class="app_grid_item app_slider_item" title="{{ 'pages.games.title' | trans | capitalize }}">
+                            <img src="{{ asset('assets/images/games/' ~ game.media) }}" class="app_grid_item_image app_image" alt="{{ game.name }}" />
+                        </a>
+                    {% endfor %}
+
+                </div>
+
+                <h2>{{ games | length }} jeu{{ games | length > 1 ? 'x' : '' }} disponible{{ games | length > 1 ? 's' : '' }} !</h2>
+
+                <a href="{{ path('games') }}" class="app_button cta" title="{{ 'pages.games.menu' | trans | capitalize }}">{{ 'pages.games.title' | trans | capitalize }}</a>
+            </section>
+        {% endif %}
+
+        <section class="play">
+            <img src="{{ asset('assets/images/home_games.png') }}" alt="{{ appConfig.getAppName() }}" />
+            <img src="{{ asset('assets/images/home_dices.png') }}" alt="{{ appConfig.getAppName() }}" />
+
+            <h2 class="fg_light">{{ scenarios | length }} partie{{ scenarios | length > 1 ? 's' : '' }} en attente de joueurs !</h2>
+
+            <a href="{{ path('play') }}" class="app_button cta" title="{{ 'pages.play.menu' | trans | capitalize }}">{{ 'pages.play.title' | trans | capitalize }}</a>
+        </section>
+    </article>
+{% endblock %}

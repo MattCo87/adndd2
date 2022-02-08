@@ -1,0 +1,32 @@
+<div class="app_grid two">
+    <div class="htitle">
+        Arme
+    </div>
+    <div class="htitle">
+        Dégâts
+    </div>
+</div>
+
+{% set equipmentRest = '' %}
+{% for characterEquipment in character.equipments %}
+    {% if characterEquipment.equipmentType %}
+        <div class="weapon app_grid two">
+            <div class="weapon_info data_case">
+                {{ characterEquipment.name }}
+            </div>
+            <div class="weapon_info data_case">
+                {{ characterEquipment.damage }}
+            </div>        
+        </div>
+        {% set equipmentRest = loop.index %}
+    {% endif %}
+{% endfor %}
+
+{% if equipmentRest != 2 %}
+{% for i in equipmentRest..1 %}
+    <div class="weapon app_grid two">
+        <div class="weapon_info data_case"></div>
+        <div class="weapon_info data_case"></div>        
+    </div>
+{% endfor %}
+{% endif %}
